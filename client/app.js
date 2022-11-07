@@ -4,9 +4,13 @@ const messagesList =document.querySelector("#messages-list")
 const addMessageForm = document.querySelector("#add-messages-form")
 const userNameInput = document.querySelector("#username")
 const messageContentInput = document.querySelector("#message-content")
+const socket = io();
 
 var userName = null;
-console.log('loginForm',loginForm)
+
+
+socket.on('message',({author, content}) => addMessage(author, content));
+
 
 
 loginForm.addEventListener("submit", function(e){
@@ -26,6 +30,7 @@ const login = () =>{
         userName = userNameInput.value;
         messagesSection.classList.add('show');
         loginForm.classList.remove('show');
+        socket.emit('logIn', ({author: userName, }))
     }   
 }
 
@@ -43,7 +48,8 @@ const sendMesage = () => {
         
         console.log('tak')
         addMessage(userName, messageContentInput.value);
-       messageContentInput.value=""
+        socket.emit('message',{author: userName, content: messageContentInput.value});
+        messageContentInput.value=""
     }else{
         
         alert('Nie wpisałeś wiadomości')
@@ -52,9 +58,12 @@ const sendMesage = () => {
 }
 
 let nextClass =""
+
 const addMessage = (user, text) =>{
     if(user ===userName){
         nextClass = 'message--self';
+    }else if(user ==='ADMIN'){
+        nextClass = 'message--admin'
     }else{
         nextClass =""
     }
@@ -63,3 +72,6 @@ const addMessage = (user, text) =>{
 
 
 }
+
+
+

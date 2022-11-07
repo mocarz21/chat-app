@@ -91,7 +91,9 @@ p {
   text-align: right;
 }
 
-.message__content {
+
+
+.message__content{
   background: rgb(68, 68, 68);
   border: none;
   border-radius: 15px 5px 15px 15px;
@@ -103,6 +105,18 @@ p {
 
 .message--self .message__content {
   background: #3498db;
+}
+
+.message--admin{
+  text-align: center;
+  background: rgb(47, 37, 175);
+  border: none;
+  border-radius: 15px 5px 15px 15px;
+  padding: 10px 25px;
+  color: #fff;
+  font-size: 0.9rem;
+  max-width: 200px;
+  
 }
 
 .show {
