@@ -45,6 +45,7 @@ p {
   outline: none;
   opacity: 0.6;
   transition: .3s;
+  
 }
 
 .text-input:focus {
